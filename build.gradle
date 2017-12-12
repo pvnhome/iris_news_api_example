@@ -1,0 +1,36 @@
+apply plugin: 'application'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+defaultTasks 'run'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = "kz.irbis.iris.news.NewsApiExample"
+
+def compileeEcoding = 'utf-8'
+def resteasyVersion = '3.0.19.Final'
+def cxfVersion      = '3.1.6'
+   
+compileJava { 
+   options.encoding = compileeEcoding 
+}
+compileTestJava {
+   options.encoding = compileeEcoding
+}
+
+repositories {
+   jcenter()
+}
+
+dependencies {
+   compile group: 'org.jboss.spec.javax.ws.rs', name: 'jboss-jaxrs-api_2.0_spec', version: '1.0.0.Final'
+   compile group: 'org.jboss.resteasy', name: 'resteasy-client', version: resteasyVersion
+   compile group: 'org.jboss.resteasy', name: 'resteasy-jackson2-provider', version: resteasyVersion
+   compile group: 'org.apache.cxf', name: 'cxf-core', version: cxfVersion
+   compile group: 'org.apache.cxf', name: 'cxf-rt-transports-http', version: cxfVersion
+   compile group: 'org.apache.cxf', name: 'cxf-rt-frontend-simple', version: cxfVersion
+   //compile group: 'org.mapdb', name: 'mapdb', version: '3.0.5'
+   compile group: 'org.clapper', name: 'javautil', version: '3.2.0'
+}
