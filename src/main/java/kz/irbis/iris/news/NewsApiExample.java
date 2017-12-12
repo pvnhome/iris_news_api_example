@@ -19,7 +19,11 @@ public class NewsApiExample {
     /**
      * IP-адрес сервера IRIS News API.
      */
-    private static final String IP = "192.168.1.24:8080";
+    private static final String IP = "192.168.1.24";
+    /**
+     * Пароль для доступа к серверу IRIS News API.
+     */
+    private static final String PASSWORD = "qqq";
     /**
      * Размер пакета новостных сообщений.
      * Столько сообщений загружается за один вызов метода IRIS News API. 
@@ -44,12 +48,12 @@ public class NewsApiExample {
 
             // Формируем URI для доступа к IRIS News API
             Client client = ClientBuilder.newClient();
-            WebTarget target = client.target("http://" + IP + "/mobilerestapi/methods/news");
+            WebTarget target = client.target("https://" + IP + ":8443/iris_news_api/methods/news");
 
             // Задаем параметры для вызова метода news
-            target = target.queryParam("username", "victor").queryParam("password", "prod");
+            target = target.queryParam("username", "mobapp").queryParam("password", PASSWORD);
             target = target.queryParam("deviceinfo", "ANDROID");
-            target = target.queryParam("depth", 30).queryParam("bundle", BUNDLE_SIZE).queryParam("langs", "ru");
+            target = target.queryParam("depth", 2).queryParam("bundle", BUNDLE_SIZE).queryParam("langs", "ru");
 
             // IRIS News API предполагает загрузку сообщений пакетами укащзанного размера.
             // Выполняем загрузку пакетов в цикле до тех пор пока не получим пустой пакет.
@@ -72,7 +76,7 @@ public class NewsApiExample {
                     }
 
                     // Обновляем последнюю загруженную версию если она меньше версии новостного сообщения.
-                    // Делаем это с учетом того, что порядок новосных сообщений не гарантируется в IRIS Nesw API.
+                    // Делаем это с учетом того, что порядок новостных сообщений не гарантируется в IRIS Nesw API.
                     if (rec.getVersion() > lastVersion) {
                         lastVersion = rec.getVersion();
                     }
