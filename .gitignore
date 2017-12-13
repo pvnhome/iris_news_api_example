@@ -2,6 +2,9 @@
 .settings
 .project
 .classpath
+*.iml
+*.ipr
+*.iws
 bin
 build
 data/*.db
